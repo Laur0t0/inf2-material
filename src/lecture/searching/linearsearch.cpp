@@ -6,10 +6,13 @@
 ///Liefert die Länge von List, falls x nicht in list vorkommt
 
 size_t find(std::vector<int>list, int x){
+    int counter = 0;
     for (int i = 0; i < list.size();i++){
+        counter++;
         if (list[i] == x){
+            std::cout << "find Anzahl Schritte: " << counter << std::endl;
             return i;
-    }
+        }
     }
     return list.size();
 }
