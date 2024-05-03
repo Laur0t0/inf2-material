@@ -1,4 +1,5 @@
 #include <vector>
+#include <iostream>
 
 ///Erwartet eine Liste und einen Wert x
 ///Liefert die Position von x in List
@@ -11,4 +12,12 @@ size_t find(std::vector<int>list, int x){
     }
     }
     return list.size();
+}
+
+int main(){
+    std::vector<int>list = {10,25,35,42,105,270,320};
+
+    std::cout << find(list, 35) << std::endl;
+
+    return 0; 
 }
