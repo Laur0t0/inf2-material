@@ -1,43 +1,55 @@
 #include <iostream>
 
 struct Element{
-    int key;
-    Element* next;
-    Element* prev;
+    private:
+        int key;
+        Element* next;
+        Element* prev;
 
-    void append(int key_){
-        Element* last = this->prev;
-        Element* e = new Element{key_, this , last};
-        this->prev = e;
-        last->next = e;
-    }
-
-    void print(){
-        for (Element* current = this->next; current != this; current = current->next){
-            std::cout << current->key << std::endl;
+    public:
+        void append(int key_){
+            Element* last = this->prev;
+            Element* e = new Element{};
+            e->key = key_;
+            e->next = this;
+            e->prev = last;
+            this->prev = e;
+            last->next = e;
         }
-    }
 
-    int get_key(size_t pos){
-        size_t current_pos = 0;
-        for (Element* current = this->next; current != this; current = current->next){
-            if (current_pos == pos){
-                return current->key;
+            void print(){
+            for (Element* current = this->next; current != this; current = current->next){
+                std::cout << current->key << std::endl;
             }
-            current_pos++;
         }
-        return -1;
-    }
 
+            int get_key(size_t pos){
+            size_t current_pos = 0;
+            for (Element* current = this->next; current != this; current = current->next){
+                if (current_pos == pos){
+                    return current->key;
+                }
+                current_pos++;
+            }
+            return -1;
+        }
+
+            Element(){
+            this->key = 0;
+            this->next = this;
+            this->prev = this;
+        }
 };
 
 int main(){
 
+/*
     //leere Liste erzeugen
     Element* anchor = new Element{0, anchor, anchor};
     anchor->next = anchor;
     anchor->prev = anchor;
-
+*/
+    Element* anchor = new Element{};
 /*
     {
         //ein Element ahängen
@@ -63,7 +75,10 @@ int main(){
     anchor -> append(38);
 
     //Die Liste länger machen
-    
+    anchor->append(105);
+    anchor->append(77);
+    anchor->append(1042);
+    anchor->append(16384);
 
 /*
     //die Liste durchlaufen und die Schlüssel ausgeben
@@ -72,6 +87,9 @@ int main(){
     }
 */
     anchor->print();
+
+    //key des Elements an Stelle 4 ausgeben
+    std::cout << anchor->get_key(4) << std::endl;
 
     std::cout << &anchor << std::endl;
 }
